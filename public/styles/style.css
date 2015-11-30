@@ -1,0 +1,182 @@
+.header {
+	background-color: navy;
+	display: block;
+	width: 100%;
+}
+
+.header a {
+	font-family: "Arial", Helvetica, sans-serif;
+	font-size: 13px;
+	color: white;
+	text-decoration: none;
+	font-weight: bold;
+	float: right;
+	margin: 0 12px;
+	display: block;
+}
+
+.container {
+	width: 88%;
+}
+
+
+body {
+	/*border: 1px solid black;*/
+	background-image: url('../img/mandala.svg');
+	background-color: rgb(20,30,60);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: center;
+	background-size: 80%;
+}
+
+	h1 {
+		padding: 2% 5%;
+		width: 100%;
+		background-color: rgba(40,80,100,0.8);
+		color: snow;
+		-webkit-text-stroke: 2px maroon;
+		font-weight: bold;
+		font-size: 42px;
+	}
+
+section {
+	background-color: rgb(200,200,220);
+	border: 1px solid black;
+	border-radius: 8px;
+	margin: 15px 0;
+	padding: 8px;
+	font-family: 'Arial', 'Helvetica', 'sans-serif';
+	font-size: 0.8em;
+}
+
+
+section > h4 {
+	padding: 0 0 5px 0;
+	font-family: 'Arial Black', Gadget, 'sans-serif';
+	display: inline;
+}
+
+section button {
+	font-family: "Arial", 'Helvetica', 'sans-serif';
+	float: right;
+	margin: 0 3px;
+}
+
+section ul {
+	border: 1px solid black;
+	background-color: white;
+	padding: 0;
+	margin: 0;
+}
+
+section > ul {
+	margin: 4px 0;
+	max-height: 400px;
+	overflow: auto;
+}
+
+section ul li {
+	list-style: none;
+}
+
+section ul li > p {
+	padding: 6px;
+	margin: 0;
+	width: 100%;
+	border-radius: 0;
+}
+
+section > ul > li > ul{
+	background-color: navy;
+}
+
+section ul li ul > li{
+	/* border: 1px dotted black; */
+
+	background-color: white;
+}
+
+section ul li ul > li:nth-child(odd) {
+	background-color: rgb(200,220,220);
+	box-shadow: 0 1px #FFFFFF inset, 0 1px 3px rgba(34, 25, 25, 0.4);
+}
+
+table input {
+	display: block !important; 
+	padding: 0 !important;
+	margin: 0 !important; 
+	border: 0 !important; 
+ 	width: 100% !important; 
+	border-radius: 0 !important; 
+	height: 80% !important;
+}
+
+
+table td {
+	margin: 0 !important; 
+	padding: 0 !important;
+	height: 80%;
+}
+
+/* Class selectors */
+
+.newRole {
+	padding: 3px 5px;
+}
+
+.newRole input{
+	width: 80%;
+}
+
+.newTask {
+	width: 97%;
+	margin: 0 auto 2px auto;
+	padding: 3px 10px;
+	border-radius: 0 0 4px 4px;
+	background-color: white
+}
+
+.newTask * {
+	padding: 0;
+}
+
+h4.text-center {
+	margin: 6px auto;
+}
+
+.scrollbar::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+	border-radius: 3px;
+}
+
+.scrollbar::-webkit-scrollbar
+{
+	width: 3px;
+	background-color: #F5F5F5;
+}
+
+.scrollbar::-webkit-scrollbar-thumb
+{
+	border-radius: 2px; 
+	background-image: -webkit-gradient(linear,
+									   left bottom,
+									   left top,
+									   color-stop(0.20, rgb(0,168,204)),
+									   color-stop(0.60, rgb(0,134,204)),
+									   color-stop(0.96, rgb(0,109,204)));
+}
+
+/* ID selectors */
+
+#weekly-planner {
+	padding: auto 16px;
+	min-width: 560px;
+}
+
+#right-col h4 {
+	display: table;
+	margin: auto;
+}

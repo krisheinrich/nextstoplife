@@ -1,0 +1,18 @@
+{
+  "name": "7_habits",
+  "version": "1.0.0",
+  "description": "MEAN stack App for organizing goals and planning your weekly schedule",
+  "main": "server.js",
+  "dependencies": {
+    "express": "~4.13.3",
+    "body-parser": "~1.14.1",
+    "mongojs": "~1.4.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Kris Heinrich",
+  "license": "BSD"
+}

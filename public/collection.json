@@ -1,0 +1,18 @@
+[
+	{
+		type: "Role",
+		name: "Coder",
+		tasks: ["Learn MEAN stack",
+				"finish app"]
+	},
+	{
+		type: "Role",
+		name: "Roommate",
+		tasks: ["Do the dishes", "clean the kitchen", "take out the garbage"]
+	},
+	{
+		type: "Saw",
+		name: "Exercise",
+		tasks: ["Go hiking", "Push-Ups", "Squats"]
+	}
+]
