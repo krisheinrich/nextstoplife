@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var mongojs = require('mongojs');
-var db = mongojs('7_habits', ['roles', 'weekList']);
+var db = mongojs('nextstop', ['roles', 'weekList']);
 var bodyParser = require('body-parser');
 
 app.use(express.static(__dirname + '/public'));
@@ -54,6 +54,7 @@ app.delete('/roles/:id', function (req, res) {
 	});
 });
 
+// Add new role/sharpener to DB
 app.post('/roles', function (req, res) {
 	console.log(req.body);
 	db.roles.insert(req.body, function (err, doc) {

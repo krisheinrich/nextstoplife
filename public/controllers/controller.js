@@ -13,10 +13,9 @@ myApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 			console.log("Successfully pulled the roles data to the controller");
 			// Store the JSON response as the exposed variable 'roles'
 			$scope.roles = response;
-			// Clear the new task and new role input bindings
-			$scope.newTask = {};
-			$scope.newTask.name = "";
+			// Clear the new role input bindings
 			$scope.newRole = "";
+			$scope.newSharpener = ""; 
 			console.log(JSON.stringify(response));
 		});
 
@@ -38,8 +37,9 @@ myApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 		$scope.newwie = {};
 		$scope.newwie.user = 'krisheinrich';  // Change this line later!!!!!
 		$scope.newwie.type = type;
-		$scope.newwie.name = $scope.newRole || $scope.newSharpener;
+		$scope.newwie.name = (type == 'role') ? $scope.newRole : $scope.newSharpener;
 		$scope.newwie.tasks = [];
+		$scope.newwie.newTask = "";
 		console.log($scope.newwie.name);
 		// Input validation
 		if ($scope.newwie.name == undefined) {
@@ -49,7 +49,6 @@ myApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 				console.log(response);
 				refresh();		
 				$scope.newRole = "";
-				$scope.newSharpener = ""; 
 			});
 		}
 	};
@@ -67,17 +66,20 @@ myApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 		event.stopPropagation();
 	};
 	
-	$scope.addTaskTo = function(id) {
-		console.log($scope.newTask.name);
-		if ($scope.newTask.name == "") {
+	// Append new task to role/sharpener task list
+	$scope.addTaskTo = function(task, id) {
+		console.log(task);
+		if (task == "") {
 			alert("Please enter a task.");
 		} else {
-			$http.put('/roles/' + id, $scope.newTask).success(function (response) {
+			var obj = {name: task};
+			$http.put('/roles/' + id, obj).success(function (response) {
 				refresh();
 			});
 		}
 	}
 
+	// Delete task from 
 	$scope.deleteTask = function (id, task) {
 		console.log(id, task);
 		$http.put('/roles/' + id + '/'+ task).success(function (response) {
@@ -85,8 +87,8 @@ myApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 		});
 	};
 
+	// Save week task lists to 2-D array
 	$scope.save;
-
 
 }]);
 
