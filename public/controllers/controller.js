@@ -32,7 +32,7 @@ myApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 
 	// Button functions
 
-	// Add role or sharpener, based on the type passed (as String) -- not finished
+	// Add role or sharpener, based on the type passed (as String)
 	$scope.addRole = function(type) {
 		$scope.newwie = {};
 		$scope.newwie.user = 'krisheinrich';  // Change this line later!!!!!
