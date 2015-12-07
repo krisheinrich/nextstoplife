@@ -76,9 +76,9 @@
 							
 						    <ul style="display:none">
 						    	<div class="newTask row">
-									<input ng-model="newTask.name" class="col-xs-8">
+									<input ng-model="role.newTask" class="col-xs-8">
 									<div class="col-xs-1">&nbsp;</div>
-									<button class="btn btn-primary btn-xs col-xs-2" ng-click="addTaskTo(role._id)">Add</button>
+									<button class="btn btn-primary btn-xs col-xs-2" ng-click="addTaskTo(role.newTask, role._id)">Add</button>
 								</div>
 						    	<li ng-repeat="task in role.tasks track by $index">
 						    		<p>

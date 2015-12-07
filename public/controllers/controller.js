@@ -67,12 +67,13 @@ myApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 		event.stopPropagation();
 	};
 	
-	$scope.addTaskTo = function(id) {
-		console.log($scope.newTask.name);
-		if ($scope.newTask.name == "") {
+	$scope.addTaskTo = function(task, id) {
+		console.log(task);
+		if (task == "") {
 			alert("Please enter a task.");
 		} else {
-			$http.put('/roles/' + id, $scope.newTask).success(function (response) {
+			var obj = {name: task};
+			$http.put('/roles/' + id, obj).success(function (response) {
 				refresh();
 			});
 		}
