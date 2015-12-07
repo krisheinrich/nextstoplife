@@ -76,13 +76,13 @@ app.put('/roles/:id', function (req, res) {
 });
 
 // For deleteTask function
-app.put('/roles/:id/:task', function (req, res) {
+app.put('/roles/del/:id', function (req, res) {
 	var id = req.params.id;
-	var task = (req.params.task).toString();
+	var task = req.body.name;
+	//var task = (req.params.task).toString();
 	console.log(id, task);
 	db.roles.update({_id: mongojs.ObjectId(id)},
-		{$pull: {tasks: task}},
-		{multi: true}
+		{$pull: {tasks: task}}
 	);
 	console.log('deleted ' + task + ' from list');
 	res.end();

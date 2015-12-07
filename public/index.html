@@ -83,7 +83,7 @@
 						    	<li ng-repeat="task in role.tasks track by $index">
 						    		<p>
 						    			<span draggable="true">{{task}}</span>
-						    			<img ng-click="deleteTask(role._id, task)" src="/img/x.png" />
+						    			<img ng-click="deleteTaskFrom(task, role._id)" src="/img/x.png" />
 						    		</p>
 						    	</li>
 						    </ul>

@@ -80,9 +80,10 @@ myApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 	}
 
 	// Delete task from 
-	$scope.deleteTask = function (id, task) {
+	$scope.deleteTaskFrom = function (task, id) {
 		console.log(id, task);
-		$http.put('/roles/' + id + '/'+ task).success(function (response) {
+		var obj = {name: task};
+		$http.put('/roles/del/' + id, obj).success(function (response) {
 			refresh();
 		});
 	};
