@@ -56,13 +56,15 @@
 		<a href="#">About the 7 Habits</a>
 	</div>
 
+	<h1>NextStop.Life</h1>
+
 	<div class="container" ng-controller="appCtrl">
 
-		<h1>NextStop.Life</h1>
+		<div id="todayDisplay"></div>
 
 		<div class="row">
 
-			<div id='left-col' class="col-lg-3">
+			<div id='left-col' class="col-md-3">
 				<section id="roles-and-goals">
 					
 					<h4>Roles and Goals <button type="button" data-toggle="modal" data-target="#roleInfoModal" class="btn btn-info btn-xs">info</button></h4>
@@ -83,7 +85,7 @@
 						    	<li ng-repeat="task in role.tasks track by $index">
 						    		<p>
 						    			<span draggable="true">{{task}}</span>
-						    			<img ng-click="deleteTask(role._id, task)" src="/img/x.png" />
+						    			<img ng-click="deleteTaskFrom(task, role._id)" src="/img/x.png" />
 						    		</p>
 						    	</li>
 						    </ul>
@@ -127,7 +129,7 @@
 				</section>
 			</div>
 
-			<div id='right-col' class="col-lg-9">
+			<div id='right-col' class="col-md-9">
 
 				<section id="weekly-planner">
 					<h4>This Week's Priorities</h4>

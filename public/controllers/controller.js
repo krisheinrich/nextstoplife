@@ -32,7 +32,7 @@ myApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 
 	// Button functions
 
-	// Add role or sharpener, based on the type passed (as String) -- not finished
+	// Add role or sharpener, based on the type passed (as String)
 	$scope.addRole = function(type) {
 		$scope.newwie = {};
 		$scope.newwie.user = 'krisheinrich';  // Change this line later!!!!!
@@ -83,9 +83,10 @@ myApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 	}
 
 	// Delete task from 
-	$scope.deleteTask = function (id, task) {
+	$scope.deleteTaskFrom = function (task, id) {
 		console.log(id, task);
-		$http.put('/roles/' + id + '/'+ task).success(function (response) {
+		var obj = {name: task};
+		$http.put('/roles/del/' + id, obj).success(function (response) {
 			refresh();
 		});
 	};
