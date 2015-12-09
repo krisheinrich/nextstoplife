@@ -87,6 +87,12 @@ section ul li > p {
 	border-radius: 0;
 }
 
+section ul li > p img {
+	width: 18px;
+	margin: auto 2px;
+	float: right;
+}
+
 section > ul > li > ul{
 	background-color: navy;
 }
@@ -125,7 +131,7 @@ table td {
 	padding: 3px 5px;
 }
 
-.newRole input{
+.newRole input {
 	width: 80%;
 }
 
