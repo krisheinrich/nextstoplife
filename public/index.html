@@ -56,7 +56,7 @@
 		<a href="#">About the 7 Habits</a>
 	</div>
 
-	<h1>NextStop.Life</h1>
+	<h1><span class="blur">NextStop.</span>Life</h1>
 
 	<div class="container" ng-controller="appCtrl">
 
@@ -69,7 +69,7 @@
 					
 					<h4>Roles and Goals <button type="button" data-toggle="modal" data-target="#roleInfoModal" class="btn btn-info btn-xs">info</button></h4>
 						
-					<ul class="scrollbar">
+					<ul class="scrollbar" ng-cloak>
 						<li ng-repeat="role in roles">
 							<p top-level type="button" class="btn btn-primary btn-block" style="border-radius: 0">
 								{{role.name}} 
@@ -101,7 +101,7 @@
 
 					<h4>Sharpen the Saw <button type="button" data-toggle="modal" data-target="#sawInfoModal" class="btn btn-info btn-xs">info</button></h4>
 
-					<ul class="scrollbar">
+					<ul class="scrollbar" ng-cloak>
 						<li ng-repeat="sharpener in sharpeners">
 							<p top-level type="button" class="btn btn-primary btn-block" style="border-radius: 0">
 								{{sharpener.name}}
@@ -135,7 +135,7 @@
 					<h4>This Week's Priorities</h4>
 				    <button type="button" class="btn btn-success btn-xs">Save</button>
 				    <button type="button" class="btn btn-primary btn-xs">Clear</button>
-					<table class="table table-bordered table-condensed">
+					<table class="table table-bordered table-condensed" ng-cloak>
 						<thead>
 							<tr>
 	    				        <th ng-repeat="day in weekdays" class="text-center">
