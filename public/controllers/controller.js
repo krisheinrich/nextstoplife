@@ -66,10 +66,7 @@ myApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 		event.stopPropagation();
 	};
 	
-<<<<<<< HEAD
-=======
 	// Append new task to role/sharpener task list
->>>>>>> e736213d624e9428a40799c7730301c95f003966
 	$scope.addTaskTo = function(task, id) {
 		console.log(task);
 		if (task == "") {
