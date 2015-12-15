@@ -58,16 +58,16 @@
 
 	<h1><span class="blur">NextStop.</span>Life</h1>
 
-	<div class="container" ng-controller="appCtrl">
+	<div class="container">
 
 		<div id="todayDisplay"></div>
 
 		<div class="row">
 
-			<div id='left-col' class="col-md-3">
+			<div id='left-col' class="col-md-3" ng-controller="tasksCtrl">>
 				<section id="roles-and-goals">
 					
-					<h4>Roles and Goals <button type="button" data-toggle="modal" data-target="#roleInfoModal" class="btn btn-info btn-xs">info</button></h4>
+					<h4>Roles and Goals <a type="button" data-toggle="modal" data-target="#roleInfoModal"><img src="/img/info.png"></a></h4>
 						
 					<ul class="scrollbar" ng-cloak>
 						<li ng-repeat="role in roles">
@@ -99,7 +99,7 @@
 
 				<section id="sharpen-the-saw">
 
-					<h4>Sharpen the Saw <button type="button" data-toggle="modal" data-target="#sawInfoModal" class="btn btn-info btn-xs">info</button></h4>
+					<h4>Sharpen the Saw <a type="button" data-toggle="modal" data-target="#sawInfoModal"><img src="/img/info.png"></a></h4>
 
 					<ul class="scrollbar" ng-cloak>
 						<li ng-repeat="sharpener in sharpeners">
@@ -115,7 +115,7 @@
 								</div>
 						    	<li ng-repeat="task in sharpener.tasks">
 						    		<p>
-						    			<span draggable="true">{{task}}</span>
+						    			<span draggable>{{task}}</span>
 						    			<img ng-click="deleteTask(sharpener._id, task)" src="/img/x.png" />
 						    		</p>
 						    	</li>
@@ -123,7 +123,7 @@
 						</li>
 					</ul>
 					<div class="newRole">
-						<input ng-model="newSharpener" value="Add New Area of Improvement">
+						<input ng-model="newSharpener">
 						<button class="btn btn-primary btn-xs" ng-click="addRole('sharpener')">Add</button>
 					</div>
 				</section>
@@ -131,10 +131,10 @@
 
 			<div id='right-col' class="col-md-9">
 
-				<section id="weekly-planner">
+				<section id="weekly-planner" ng-controller="weekCtrl">
 					<h4>This Week's Priorities</h4>
-				    <button type="button" class="btn btn-success btn-xs">Save</button>
-				    <button type="button" class="btn btn-primary btn-xs">Clear</button>
+				    <button type="button" class="btn btn-success btn-xs" ng-click="saveWeek()">Save</button>
+				    <button type="button" class="btn btn-primary btn-xs" ng-click="clearWeek()">Clear</button>
 					<table class="table table-bordered table-condensed" ng-cloak>
 						<thead>
 							<tr>
@@ -144,8 +144,8 @@
 					        </tr>
 						</thead>
 				      	<tbody>
-				        	<tr ng-repeat="num in [1,2,3,4,5,6]">
-	    				        <td ng-repeat="day in weekdays"><input type="text" class="form-control" /></td>
+				        	<tr ng-repeat="num in [0,1,2,3,4,5]" ng-cloak>
+	    				        <td ng-repeat="day in weekdays"><input droppable drop="handleDrop" ng-model="weekObj[day.toLowerCase()][num]" id="{{day.toLowerCase()}}-{{num}}" type="text" class="form-control" /></td>
 					        </tr>
 					    </tbody>
 				    </table>

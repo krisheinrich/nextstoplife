@@ -1,11 +1,17 @@
 var express = require('express');
 var app = express();
 var mongojs = require('mongojs');
-var db = mongojs('mongodb://krisheinrich:bcp2007@ds061974.mongolab.com:61974/nextstoplife', ['roles', 'weeItems']);
+
+var db = mongojs('nextstop', ['roles', 'weekItems']);
+// var db = mongojs('mongodb://krisheinrich:bcp2007@ds061974.mongolab.com:61974/nextstoplife', ['roles', 'weekItems']);
+
 var bodyParser = require('body-parser');
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
+
+
+// ROUTES
 
 app.get('/', function (req, res) {
 	console.log("The server says hello")
@@ -26,7 +32,6 @@ app.get('/roles', function (req, res) {
 app.get('/sharpeners', function (req, res) {
 	console.log("Received sharpeners list");
 
-	// Pull data from mongo
 	db.roles.find({type: "sharpener", user: "krisheinrich"}, function (err, docs) {
 		console.log(docs);
 		res.json(docs);  // send array of DB docs as GET response
@@ -34,11 +39,11 @@ app.get('/sharpeners', function (req, res) {
 });
 
 // Gets the weekly priorities data from DB
-app.get('/weekList', function (req, res) {
+app.get('/weekItems', function (req, res) {
 	console.log("Received week list");
 
 	// Pull data from mongo
-	db.weekList.find({user: "krisheinrich"}, function (err, docs) {
+	db.weekItems.find({user: "krisheinrich"}, function (err, docs) {
 		console.log(docs);
 		res.json(docs);  // send array of DB docs as GET response
 	});
@@ -86,6 +91,25 @@ app.put('/roles/del/:id', function (req, res) {
 	);
 	console.log('deleted ' + task + ' from list');
 	res.end();
+});
+
+// Save week items
+app.post('/weekItems', function (req, res) {
+	console.log(req.body);   // req.body: {sunday: [], monday: [], ...}
+	var week = req.body;
+	console.log(week);
+	var docs = [];
+	for (day in week) {
+		var doc = {};
+		doc.user = "krisheinrich";     // CHANGE LATER!! **
+		doc.day = day;
+		doc.tasks = week[day];
+		docs.push(doc);
+	}
+	db.weekItems.insert(docs, function (err, doc) {
+			res.json(doc);
+		});
+	
 });
 
 
