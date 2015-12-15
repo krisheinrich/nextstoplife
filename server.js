@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var mongojs = require('mongojs');
-var db = mongojs('nextstop', ['roles', 'weekList']);
+var db = mongojs('mongodb://krisheinrich:bcp2007@ds061974.mongolab.com:61974/nextstoplife', ['roles', 'weeItems']);
 var bodyParser = require('body-parser');
 
 app.use(express.static(__dirname + '/public'));
