@@ -1,10 +1,7 @@
 var myApp = angular.module('myApp', []);
 
-myApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
+myApp.controller('tasksCtrl', ['$scope', '$http', function($scope, $http) {
 	console.log("Controller file is running!");
-
-	// Week array for calendar
-	$scope.weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 	// Refreshes the page to update the view with current db info
 	var refresh = function() {
@@ -22,7 +19,6 @@ myApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 		// GET the 'sharpen the saw' data
 		$http.get('/sharpeners').success(function (response) {
 			console.log("Successfully pulled the 'sharpen the saw' data to the controller");
-
 			$scope.sharpeners = response;
 			console.log(JSON.stringify(response));
 		});
@@ -88,8 +84,66 @@ myApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 		});
 	};
 
-	// Save week task lists to 2-D array
-	$scope.save;
+}]);
+
+
+// Controller for this week's calendar section
+
+myApp.controller('weekCtrl', ['$scope', '$http', function($scope, $http) {
+
+	// Week array for calendar
+	$scope.weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+	// Reset week data
+	$scope.weekObj = {};
+	for (var i = 0; i<7; i++) {
+		$scope.weekObj[$scope.weekdays[i].toLowerCase()] = [];
+	}
+
+	// Refreshes the week info
+	var refresh = function() {
+
+		// GET the week's data
+		$http.get('/weekItems').success(function (response) {
+			console.log("Successfully pulled the week data to the controller");
+			$scope.weekObj = {};
+			for (var i = 0; i < response.length; i++) {
+				var day = response[i].day;
+				var tasks = response[i].tasks;
+				$scope.weekObj[day] = tasks;
+			}
+		});
+	};
+
+	refresh();
+
+	/*
+	// Drag and Drop
+
+	$scope.handleDrop = function(item, slot) {
+		alert('Item ' + item + ' has been dropped into ' + slot);
+	}
+	*/
+
+	// BUTTONS for week view
+
+	// Save week task lists to DB
+	$scope.saveWeek = function () {
+		var obj = $scope.weekObj;
+		console.log(obj);
+		$http.post('/weekItems', obj).success(function (response) {
+				console.log(response);
+				//refresh();
+			});
+	};
+
+	// Clear week display
+	$scope.clearWeek = function() {
+		$scope.weekObj = {};
+		for (var i = 0; i<7; i++) {
+			$scope.weekObj[$scope.weekdays[i].toLowerCase()] = [];
+		}
+	};
 
 }]);
 
@@ -107,3 +161,105 @@ myApp.directive("topLevel", function() {
         }
     }
 });
+
+// Drag and drop functions
+
+myApp.directive('draggable', function() {
+  return function(scope, element) {
+    // this gives us the native JS object
+    var el = element[0];
+    
+    el.draggable = true;
+    
+    el.addEventListener(
+      'dragstart',
+      function(e) {
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('Text', this.innerHTML);
+        this.classList.add('drag');
+        return false;
+      },
+      false
+    );
+    
+    el.addEventListener(
+      'dragend',
+      function(e) {
+        this.classList.remove('drag');
+        return false;
+      },
+      false
+    );
+  }
+});
+
+myApp.directive('droppable', function() {
+  return {
+    scope: {
+      drop: '&',
+      ngModel: '='
+    },
+    link: function(scope, element) {
+      // again we need the native object
+      var el = element[0];
+      
+      el.addEventListener(
+        'dragover',
+        function(e) {
+          e.dataTransfer.dropEffect = 'move';
+          // allows us to drop
+          if (e.preventDefault) e.preventDefault();
+          this.classList.add('over');
+          return false;
+        },
+        false
+      );
+      
+      el.addEventListener(
+        'dragenter',
+        function(e) {
+          this.classList.add('over');
+          return false;
+        },
+        false
+      );
+      
+      el.addEventListener(
+        'dragleave',
+        function(e) {
+          this.classList.remove('over');
+          return false;
+        },
+        false
+      );
+      
+      el.addEventListener(
+        'drop',
+        function(e) {
+          // Stops some browsers from redirecting.
+          if (e.stopPropagation) e.stopPropagation();
+          
+          this.classList.remove('over');
+          
+          var binId = this.id;
+          var text = e.dataTransfer.getData('Text');
+          //var item = document.createTextNode(text);
+          //this.appendChild(item); 
+          //var split = binId.split('-');
+          //var weekday = split[0];
+          //var pos = split[1];
+          //scope.weekObj[weekday.toLowerCase()].push(text);
+          scope.ngModel = text;
+          
+          return false;
+        },
+        false
+      );
+    }
+  }
+});
+
+
+
+
+

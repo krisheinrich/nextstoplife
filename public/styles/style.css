@@ -57,16 +57,22 @@ section {
 	border: 1px solid black;
 	border-radius: 8px;
 	margin: 15px 0;
-	padding: 8px;
+	padding: 10px;
 	font-family: 'Arial', 'Helvetica', 'sans-serif';
 	font-size: 0.8em;
 }
 
 
 section > h4 {
-	padding: 0 0 5px 0;
+	margin: 0 0 5px 0;
 	font-family: 'Arial Black', Gadget, 'sans-serif';
 	display: inline;
+}
+
+section img {
+	float: right;
+	width: 17px;
+	margin: 0 3px;
 }
 
 section button {
@@ -122,29 +128,35 @@ section ul li ul > li:nth-child(odd) {
 
 table input {
 	display: block !important; 
-	padding: 0 !important;
+	padding: 0 5px !important;
 	margin: 0 !important; 
 	border: 0 !important; 
  	width: 100% !important; 
 	border-radius: 0 !important; 
-	height: 80% !important;
+	height: 32px !important;
 }
 
 
 table td {
 	margin: 0 !important; 
 	padding: 0 !important;
-	height: 80%;
 }
+
+	table td div {
+		margin 2px;
+		overflow: auto;
+		border: 1px solid black;
+	}
 
 /* Class selectors */
 
 .newRole {
-	padding: 3px 5px;
+	margin-top: 10px;
+	padding: 0;
 }
 
 .newRole input {
-	width: 80%;
+	width: 83%;
 }
 
 .newTask {
@@ -185,6 +197,10 @@ h4.text-center {
 									   color-stop(0.20, rgb(0,168,204)),
 									   color-stop(0.60, rgb(0,134,204)),
 									   color-stop(0.96, rgb(0,109,204)));
+}
+
+.over {
+	background-color: rgb(200,180,180);
 }
 
 /* ID selectors */
