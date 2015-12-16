@@ -8,6 +8,15 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'Lucida Sans Demibold';
+		url('../fonts/lucida-sans-demibold.woff') format('woff'),
+		url('../fonts/lucida-sans-demibold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+
 .header {
 	background-color: navy;
 	display: block;
@@ -65,7 +74,7 @@ section {
 
 section > h4 {
 	margin: 0 0 5px 0;
-	font-family: 'Arial Black', Gadget, 'sans-serif';
+	font-family: 'Lucida Sans Demibold', 'Arial Black', Gadget, 'sans-serif';
 	display: inline;
 }
 
@@ -218,7 +227,11 @@ h4.text-center {
 	min-width: 560px;
 }
 
+#right-col > section {
+	text-align: center;
+}
+
 #right-col h4 {
-	display: table;
+	display: inline-block;
 	margin: auto;
 }

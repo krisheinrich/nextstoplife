@@ -1,0 +1,32 @@
+<h4>
+	Roles and Goals 
+	<a type="button" data-toggle="modal" data-target="#roleInfoModal"><img src="/img/info.png"></a>
+</h4>
+						
+<ul class="scrollbar" ng-cloak>
+	<li ng-repeat="role in roles">
+		<p top-level type="button" class="btn btn-primary btn-block" style="border-radius: 0">
+			{{role.name}} 
+			<button ng-click="deleteRole(role._id, role.name)" class="btn btn-danger btn-xs">X</button>
+		</p>
+		
+	    <ul style="display:none">
+	    	<div class="newTask row">
+				<input ng-model="role.newTask" class="col-xs-8">
+				<div class="col-xs-1">&nbsp;</div>
+				<button class="btn btn-primary btn-xs col-xs-2" ng-click="addTaskTo(role.newTask, role._id)">Add</button>
+			</div>
+	    	<li ng-repeat="task in role.tasks track by $index">
+	    		<p>
+	    			<span draggable="true">{{task}}</span>
+	    			<img ng-click="deleteTaskFrom(task, role._id)" src="/img/x.png" />
+	    		</p>
+	    	</li>
+	    </ul>
+	</li>
+</ul>
+
+<div class="newRole">
+	<input type="text" ng-model="newRole">
+	<button class="btn btn-primary btn-xs" ng-click="addRole('role')">Add</button>
+</div>

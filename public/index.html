@@ -3,7 +3,6 @@
 <head>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
 
@@ -14,41 +13,7 @@
 
 <body>
 
-    <!-- Modals -->
-    <div class="modal fade" id="roleInfoModal" role="dialog">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Roles & Goals</h4>
-          </div>
-          <div class="modal-body">
-            <p>Roles describe the identities that you assume, and goals correspond to the responsibilities that you have to others based on this identity.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-    <div class="modal fade" id="sawInfoModal" role="dialog">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Sharpen the Saw</h4>
-          </div>
-          <div class="modal-body">
-            <p>Sharpen the saw refers to priorites which allow you to fulfill your goals optimally, such as exercising, eating healthily, and getting mental stimulation.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  	<!-- End Modals -->
+    <div ng-include="'views/modals.html'"></div>
 
 	<div class="header">
 		<a href="#">Log In</a>
@@ -64,104 +29,16 @@
 
 		<div class="row">
 
-			<div id='left-col' class="col-md-3" ng-controller="tasksCtrl">>
-				<section id="roles-and-goals">
-					
-					<h4>Roles and Goals <a type="button" data-toggle="modal" data-target="#roleInfoModal"><img src="/img/info.png"></a></h4>
-						
-					<ul class="scrollbar" ng-cloak>
-						<li ng-repeat="role in roles">
-							<p top-level type="button" class="btn btn-primary btn-block" style="border-radius: 0">
-								{{role.name}} 
-								<button ng-click="deleteRole(role._id, role.name)" class="btn btn-danger btn-xs">X</button>
-							</p>
-							
-						    <ul style="display:none">
-						    	<div class="newTask row">
-									<input ng-model="role.newTask" class="col-xs-8">
-									<div class="col-xs-1">&nbsp;</div>
-									<button class="btn btn-primary btn-xs col-xs-2" ng-click="addTaskTo(role.newTask, role._id)">Add</button>
-								</div>
-						    	<li ng-repeat="task in role.tasks track by $index">
-						    		<p>
-						    			<span draggable="true">{{task}}</span>
-						    			<img ng-click="deleteTaskFrom(task, role._id)" src="/img/x.png" />
-						    		</p>
-						    	</li>
-						    </ul>
-						</li>
-					</ul>
-					<div class="newRole">
-						<input type="text" ng-model="newRole">
-						<button class="btn btn-primary btn-xs" ng-click="addRole('role')">Add</button>
-					</div>
-				</section>
-
-				<section id="sharpen-the-saw">
-
-					<h4>Sharpen the Saw <a type="button" data-toggle="modal" data-target="#sawInfoModal"><img src="/img/info.png"></a></h4>
-
-					<ul class="scrollbar" ng-cloak>
-						<li ng-repeat="sharpener in sharpeners">
-							<p top-level type="button" class="btn btn-primary btn-block" style="border-radius: 0">
-								{{sharpener.name}}
-								<button ng-click="deleteRole(sharpener._id, sharpener.name)" class="btn btn-danger btn-xs">X</button>
-							</p>
-						    <ul style="display:none">
-						    	<div class="newTask row">
-									<input ng-model="sharpener.newTask" class="col-xs-8">
-									<div class="col-xs-1">&nbsp;</div>
-									<button class="btn btn-primary btn-xs col-xs-2" ng-click="addTaskTo(sharpener.newTask, sharpener._id)">Add</button>
-								</div>
-						    	<li ng-repeat="task in sharpener.tasks">
-						    		<p>
-						    			<span draggable>{{task}}</span>
-						    			<img ng-click="deleteTask(sharpener._id, task)" src="/img/x.png" />
-						    		</p>
-						    	</li>
-						    </ul>
-						</li>
-					</ul>
-					<div class="newRole">
-						<input ng-model="newSharpener">
-						<button class="btn btn-primary btn-xs" ng-click="addRole('sharpener')">Add</button>
-					</div>
-				</section>
+			<div id='left-col' class="col-md-3" ng-controller="tasksCtrl">
+				<section id="roles-and-goals" ng-include="'/views/rolesAndGoals.html'"></section>
+				<section id="sharpen-the-saw" ng-include="'/views/sharpenTheSaw.html'"></section>
 			</div>
 
 			<div id='right-col' class="col-md-9">
 
-				<section id="weekly-planner" ng-controller="weekCtrl">
-					<h4>This Week's Priorities</h4>
-				    <button type="button" class="btn btn-success btn-xs" ng-click="saveWeek()">Save</button>
-				    <button type="button" class="btn btn-primary btn-xs" ng-click="clearWeek()">Clear</button>
-					<table class="table table-bordered table-condensed" ng-cloak>
-						<thead>
-							<tr>
-	    				        <th ng-repeat="day in weekdays" class="text-center">
-	    				        	{{day}}
-	    				        </th>
-					        </tr>
-						</thead>
-				      	<tbody>
-				        	<tr ng-repeat="num in [0,1,2,3,4,5]" ng-cloak>
-	    				        <td ng-repeat="day in weekdays"><input droppable drop="handleDrop" ng-model="weekObj[day.toLowerCase()][num]" id="{{day.toLowerCase()}}-{{num}}" type="text" class="form-control" /></td>
-					        </tr>
-					    </tbody>
-				    </table>
+				<section id="weekly-planner" ng-controller="weekCtrl" ng-include="'views/weekTasks.html'"></section>
+				<section id="calendar" ng-include="'views/calendar.html'"></section>
 
-				</section>
-				<section id="calendar">
-					<h4 class="text-center">My Calendar</h4>
-					<iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;
-					    showPrint=0&amp;showTz=0&amp;height=876&amp;wkst=1&amp;bgcolor=%2333ccff&amp;
-					    src=krisheinrich%40gmail.com&amp;color=%2329527A&amp;
-					    src=9hbloob2bds0kv9lp11jnnvjos%40group.calendar.google.com&amp;color=%23865A5A&amp;
-					    src=jj7n8io497maecmsmicaekj680%40group.calendar.google.com&amp;color=%23125A12&amp;
-					    src=nvd0ng4rlje811j1fq1s3sbv2k%40group.calendar.google.com&amp;color=%23711616&amp;
-					    ctz=America%2FLos_Angeles" style=" border:solid 1px #777 " width="100%" height="540" frameborder="0" scrolling="no">
-					</iframe>
-				</section>
 			</div>
 		</div>
 

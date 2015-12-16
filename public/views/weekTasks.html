@@ -1,0 +1,18 @@
+<h4>This Week's Priorities</h4>
+<button type="button" class="btn btn-success btn-xs" ng-click="saveWeek()">Save</button>
+<button type="button" class="btn btn-primary btn-xs" ng-click="clearWeek()">Clear</button>
+
+<table class="table table-bordered table-condensed" ng-cloak>
+	<thead>
+		<tr>
+	        <th ng-repeat="day in weekdays" class="text-center">
+	        	{{day}}
+	        </th>
+        </tr>
+	</thead>
+  	<tbody>
+    	<tr ng-repeat="num in [0,1,2,3,4,5]" ng-cloak>
+	        <td ng-repeat="day in weekdays"><input droppable drop="handleDrop" ng-model="weekObj[day.toLowerCase()][num]" id="{{day.toLowerCase()}}-{{num}}" type="text" class="form-control" /></td>
+        </tr>
+    </tbody>
+</table>
